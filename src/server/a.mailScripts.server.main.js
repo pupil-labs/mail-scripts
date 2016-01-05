@@ -11,8 +11,31 @@ function setup(){
   // the array must be stringified b/c script properties only string key value pairs 
   scriptProperties.setProperties({"email_addresses":JSON.stringify(addresses)});
 
-  //TODO:
-  // add install triggers programmatically 
+  // create triggers programmatically
+
+  // threads to inbox is called every minute
+  ScriptApp.newTrigger('threadsToInbox')
+      .timeBased()
+      .everyMinutes(1)
+      .create();
+
+  // snooze is called daily at 5AM
+  // the `atHour` function runs + or - 15 min
+  // so the time is not always exactly the same
+  ScriptApp.newTrigger('snooze')
+      .timeBased()
+      .atHour(5)
+      .everyDays(1)
+      .create();
+
+  // nag is called daily at 6AM
+  // the `atHour` function runs + or - 15 min
+  // so the time is not always exactly the same
+  ScriptApp.newTrigger('nag')
+      .timeBased()
+      .atHour(6)
+      .everyDays(1)
+      .create();
 }
 
 function threadsToInbox(){  
@@ -47,7 +70,7 @@ function threadsToInbox(){
         return; 
       }      
       
-      var last_sender = getLastSenderEmail(messages[i][len].getFrom());
+      var last_sender_email = getLastSenderEmail(messages[i][len].getFrom());
 
       // if we are not the last sender in the thread, then add thread to update list
       // we need to move new messages to the appropriate place within the priority inbox
