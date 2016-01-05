@@ -55,3 +55,18 @@ function setupTriggers(){
       .everyDays(1)
       .create();
 }
+
+
+/**
+ * Passed into the configuration factory constructor
+ * @return {myproj.json.Configuration} Default configuration settings.
+ */
+// required if using configuration library 
+function getDefaultConfiguration_() {
+  return {
+    debug: false,
+    sheets: {
+      debugSpreadsheetId: null
+    }
+  };
+}
