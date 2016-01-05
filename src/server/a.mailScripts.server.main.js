@@ -33,7 +33,7 @@ function threadsToInbox(){
   var threadsToUpdate = [];
 
   if (messages == null){
-    Logger.warning("Mail Script `messages` = " + typeof messages);
+    Logger.log("Mail Script `messages` = " + typeof messages);
     return;
   } else {
 
@@ -49,7 +49,8 @@ function threadsToInbox(){
       
       var last_sender = getLastSenderEmail(messages[i][len].getFrom());
 
-      // if we are not the last sender then add thread to update list
+      // if we are not the last sender in the thread, then add thread to update list
+      // we need to move new messages to the appropriate place within the priority inbox
       if (indexOf.call(my_email_addresses, last_sender_email) < 0) {
         threadsToUpdate.push(threads[i]);   
       }
