@@ -4,10 +4,20 @@ function threadsToInbox(){
   //   - If this function is called every 1 minute, the maximum runtime is calculated as follows (must be less than quota as we have other triggers):
   //     - max_runtime < (6 hours total quota / 60 minutes) / (1 trigger/minute * 60 minutes/hr * 24 hr/day )
   //     - max_runtime < (360 minutes quota) / (1440 minutes)
-  //     - max_runtime < 15 seconds  
-  //   - Current runtime is dependent on 
-  // uncomment the line below and the last line in the function to see runtime
-  // var startTime = new Date().getTime();
+  //     - max_runtime < 15 seconds or 15000 milliseconds   
+  // Average runtime should be between 2 to 4 seconds (unless the inbox is full of threads of length 10000+)
+
+  var config = Configuration.getCurrent();
+  if (config.debug){
+    // override GAS console logger and use our spreadsheet
+    // defined as environment variable for debug configuration
+    Logger = BetterLog.useSpreadsheet(config.sheets.logSheetId);
+    Logger.level = BetterLogLevels.DEBUG;
+  }
+
+  // startTime is only used for profiling in debug mode
+  // the call to config/logger is not included in timing
+  var startTime = new Date().getTime();
   
   var threads = GmailApp.getInboxThreads(0,15); //we don't need to look at everything in the inbox just most recent 15 threads
   var messages = GmailApp.getMessagesForThreads(threads);
@@ -15,23 +25,23 @@ function threadsToInbox(){
   var my_email_addresses = JSON.parse(PropertiesService.getScriptProperties().getProperty("email_addresses"));
   var threadsToUpdate = [];
 
-  if (messages == null){
-    Logger.log("Mail Script `messages` = " + typeof messages);
+  if (messages === null){
+    Logger.warning("Mail Script `messages` = " + typeof messages);
     return;
   } else {
 
     for (var i = 0; i < messages.length; i++) {
       
+      var len = 0;
       try{
-        var len = messages[i].length-1;
+        len = messages[i].length-1;
       }catch(e) {
-        Logger.log("Mail Script Error : messages[i].length-1. Error message: " + e.message);
+        Logger.error("Mail Script Error : messages[i].length-1. Error message: " + e.message);
         // return early 
         return; 
       }      
       
       var last_sender_email = getLastSenderEmail(messages[i][len].getFrom());
-
       // if we are not the last sender in the thread, then add thread to update list
       // we need to move new messages to the appropriate place within the priority inbox
       if (indexOf.call(my_email_addresses, last_sender_email) < 0) {
@@ -45,8 +55,7 @@ function threadsToInbox(){
     GmailApp.refreshThreads(threadsToUpdate);
   }
 
-  // uncomment to test runtimes
-  // Logger.log("Function runtime: %s", new Date().getTime() - startTime); 
+  Logger.debug("Function runtime in (ms): %s", new Date().getTime() - startTime); 
 }
 
 
@@ -94,7 +103,7 @@ function snooze(){
 function nag() {
   // label variables -- update to match those in gmail interface if required
   var nagLabel = "nag";
-  var replyFailLabel = "failure to reply"
+  var replyFailLabel = "failure to reply";
   var timeLabels = ["4w","1w","3d","1d"];
   var my_email_addresses = JSON.parse(PropertiesService.getScriptProperties().getProperty("email_addresses"));
 
@@ -130,9 +139,9 @@ function nag() {
         // therefore we assume we didn't get a reply
         // and can add the replyFailLabel  
 
-        for (var i = 0; i < nagTimes.length; i++) {
+        for (var k = 0; k < nagTimes.length; k++) {
           // remove all nage time labels
-          threads[j].removeLabel(GmailApp.getUserLabelByName(nagTimes[i])); 
+          threads[j].removeLabel(GmailApp.getUserLabelByName(nagTimes[k])); 
         }
         // remove nag label and apply the replyFailLabel
         threads[j].removeLabel(GmailApp.getUserLabelByName(nagLabel));

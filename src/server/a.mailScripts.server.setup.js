@@ -4,7 +4,6 @@ function setup(){
   setupTriggers();
 }
 
-
 function setupScriptProperties() {
   // delete all triggers if existing
   PropertiesService.getScriptProperties().deleteAllProperties();

@@ -5,17 +5,18 @@ indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l;
 
 function getLastSenderEmail(sender){
   try {
-  // some emails are sent from "User Name <username@example.com>"
-  // we only want the email address not the sender display name
-  // we use regex to get just the email address part
-  var last_sender_email = sender.match(/<(.*?)>/)[1]; 
+    // some emails are sent from "User Name <username@example.com>"
+    // we only want the email address not the sender display name
+    // we use regex to get just the email address part
+    var last_sender_email = sender.match(/<(.*?)>/)[1]; 
+    return last_sender_email;
   } catch(e){
-  // other emails do not contain a display name
-  // These are just: "username@example.com"
-  // so we don't need to modify the string at all here
-  var last_sender_email = sender;
+    // other emails do not contain a display name
+    // These are just: "username@example.com"
+    // so we don't need to modify the string at all here
+    var last_sender_email = sender;
+    return last_sender_email;
   }
-  return last_sender_email;
 }
 
 function filterTimeLabels(threadLabels,timeLabels) {
