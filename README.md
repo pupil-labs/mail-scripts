@@ -9,7 +9,7 @@ If you're not using a priority inbox, you can remove this function and the trigg
 There are two ways to setup the mail-scripts for your inbox.
 
 ### Option 1 - Quickstart - copy + paste code
-Create a new script file in your Drive folder. Copy code from `libs` and `server` and paste into the script file. These can be contained within separate files to mirror the structure of this project, or can be contained just one code file. Run the `setup` function to create triggers and save your email aliases if you have any to script properties. Finally,
+Create a new script file in your Drive folder. Copy code from `env`, `libs`, and `server` and paste into the the google app script editor script file. The files can be contained within separate files to mirror the structure of this project, or can be contained just one code file. Run the `setup` function to create triggers and save your email aliases to the script properties. In your gmail inbox create labels to match that in the production and/or development environments (you can edit the names as desired).
 
 ### Option 2 - Developer Route - using `gapps` node module
 Use the project [node-google-apps-script](https://www.npmjs.com/package/node-google-apps-script) to upload from the command line.

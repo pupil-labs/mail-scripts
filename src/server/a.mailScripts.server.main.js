@@ -64,9 +64,10 @@ function snooze(){
   // you must make the "snooze" label and at least one time label
   // time labels in your gmail interface must match those below
   // you can use a combination of labels  
-  var snoozeLabel = "snooze";
-  var awakeLabel = "awake";
-  var timeLabels = ["4w","1w","3d","1d"];
+  var config = Configuration.getCurrent();
+  var snoozeLabel = config.gmailLabels_snooze;
+  var awakeLabel = config.gmailLabels_awake;
+  var timeLabels = config.gmailLabels_durations;
 
   var allLabels = GmailApp.getUserLabels();
   var threads = GmailApp.getUserLabelByName(snoozeLabel).getThreads();
@@ -101,9 +102,10 @@ function snooze(){
 // move thread to inbox only if there was no reply from the customer to the thread within specified time period
 function nag() {
   // label variables -- update to match those in gmail interface if required
-  var nagLabel = "nag";
-  var replyFailLabel = "failure to reply";
-  var timeLabels = ["4w","1w","3d","1d"];
+  var config = Configuration.getCurrent();
+  var nagLabel = config.gmailLabels_nag;
+  var replyFailLabel = config.gmailLabels_chase;
+  var timeLabels = config.gmailLabels_durations;
   var my_email_addresses = JSON.parse(PropertiesService.getScriptProperties().getProperty("email_addresses"));
 
   var allLabels = GmailApp.getUserLabels();

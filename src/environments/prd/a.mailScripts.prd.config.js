@@ -20,5 +20,10 @@
 function provideEnvironmentConfiguration_(configuration) {
   configuration.sheets.logSheetId = '1BHqaOe7Ls8l6IbvLD2TJ7zSXtxmSce-n-_kQq8QvTD0';
   configuration.logLevel = 'WARNING';
+  configuration.gmailLabels_snooze = "snooze";
+  configuration.gmailLabels_awake = "awake";
+  configuration.gmailLabels_nag = "nag";
+  configuration.gmailLabels_chase = "failure to reply"
+  configuration.gmailLabels_durations = ["4w","1w","3d","1d"];
   return configuration;
 }

@@ -4,6 +4,21 @@ function setup(){
   setupTriggers();
 }
 
+/**
+ * Passed into the configuration factory constructor
+ * @return {myproj.json.Configuration} Default configuration settings.
+ */
+// required if using configuration library 
+function getDefaultConfiguration_() {
+  return {
+    debug: false,
+    sheets: {
+      debugSpreadsheetId: null
+    },
+  };
+}
+
+
 function setupScriptProperties() {
   // delete all triggers if existing
   PropertiesService.getScriptProperties().deleteAllProperties();
@@ -53,19 +68,4 @@ function setupTriggers(){
       .atHour(6)
       .everyDays(1)
       .create();
-}
-
-
-/**
- * Passed into the configuration factory constructor
- * @return {myproj.json.Configuration} Default configuration settings.
- */
-// required if using configuration library 
-function getDefaultConfiguration_() {
-  return {
-    debug: false,
-    sheets: {
-      debugSpreadsheetId: null
-    }
-  };
 }
