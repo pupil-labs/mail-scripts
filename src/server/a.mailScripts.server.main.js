@@ -8,14 +8,11 @@ function threadsToInbox(){
   // Average runtime should be between 2 to 4 seconds (unless the inbox is full of threads of length 10000+)
 
   var config = Configuration.getCurrent();
-  if (config.debug){
-    // override GAS console logger and use our spreadsheet
-    // defined as environment variable for debug configuration
-    Logger = BetterLog.useSpreadsheet(config.sheets.logSheetId);
-    Logger.level = BetterLogLevels.DEBUG;
-  } else {
-    Logger.level = BetterLogLevels.INFO;
-  }
+  // override GAS console logger and use our spreadsheet
+  // defined as environment variable for debug configuration
+  Logger = BetterLog.useSpreadsheet(config.sheets.logSheetId);
+  Logger.setLevel(config.logLevel);
+  
 
   // startTime is only used for profiling in debug mode
   // the call to config/logger is not included in timing

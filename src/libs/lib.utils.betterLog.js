@@ -36,8 +36,7 @@ var BetterLog = {
   // logger methods
   ////////////////////////////////////////////////////////////////////////////////////////////////
   critical: function(message,optValues){
-    var currentLevel = BetterLogLevels.CRITICAL;
-    if(this.level <= currentLevel){
+    if(BetterLogLevels.CRITICAL <= this.level){
       this.log_({"message": (typeof message == 'string' || message instanceof String) ? Utilities.formatString.apply(this, arguments) : message,
             "level": currentLevel,
             "time": new Date(),
@@ -48,8 +47,7 @@ var BetterLog = {
   },
 
   error: function(message,optValues){
-    var currentLevel = BetterLogLevels.ERROR;
-    if(this.level <= currentLevel){
+    if(BetterLogLevels.ERROR >= this.level){
       this.log_({"message": (typeof message == 'string' || message instanceof String) ? Utilities.formatString.apply(this, arguments) : message,
             "level": currentLevel,
             "time": new Date(),
@@ -60,8 +58,7 @@ var BetterLog = {
   },
 
   warning: function(message,optValues){
-    var currentLevel = BetterLogLevels.WARNING;
-    if(this.level <= currentLevel){
+    if(BetterLogLevels.WARNING >= this.level){
       this.log_({"message": (typeof message == 'string' || message instanceof String) ? Utilities.formatString.apply(this, arguments) : message,
             "level": currentLevel,
             "time": new Date(),
@@ -73,8 +70,7 @@ var BetterLog = {
 
 
   info: function(message,optValues){
-    var currentLevel = BetterLogLevels.INFO;
-    if(this.level <= currentLevel){
+    if(BetterLogLevels.INFO >= this.level){
       this.log_({"message": (typeof message == 'string' || message instanceof String) ? Utilities.formatString.apply(this, arguments) : message,
             "level": currentLevel,
             "time": new Date(),
@@ -85,8 +81,7 @@ var BetterLog = {
   },
 
   debug: function(message,optValues){
-    var currentLevel = BetterLogLevels.DEBUG;
-    if(this.level <= currentLevel){
+    if(BetterLogLevels.DEBUG >= this.level){
       this.log_({"message": (typeof message == 'string' || message instanceof String) ? Utilities.formatString.apply(this, arguments) : message,
             "level": currentLevel,
             "time": new Date(),
@@ -203,6 +198,10 @@ var BetterLog = {
     return s;
   },
 
+  setLevel: function(strLevel){
+    this.level = BetterLogLevels[strLevel];
+  },
+
   //copy version 10 lib GASRetry 'MGJu3PS2ZYnANtJ9kyn2vnlLDhaBgl_dE' (changed function name and log line)
   call_: function(func, optLoggerFunction) {
     for (var n=0; n<6; n++) {
@@ -218,3 +217,5 @@ var BetterLog = {
     }
   }
 };
+
+
