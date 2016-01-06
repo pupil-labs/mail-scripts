@@ -13,6 +13,8 @@ function threadsToInbox(){
     // defined as environment variable for debug configuration
     Logger = BetterLog.useSpreadsheet(config.sheets.logSheetId);
     Logger.level = BetterLogLevels.DEBUG;
+  } else {
+    Logger.level = BetterLogLevels.INFO;
   }
 
   // startTime is only used for profiling in debug mode
