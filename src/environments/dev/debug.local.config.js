@@ -25,9 +25,9 @@
  *     The current configuration settings, updated with test settings.
  */
  function provideEnvironmentConfiguration_(configuration) {
-  //TODO: (blog post reader) Change ID below to a Spreadsheet ID you can read
-  configuration.sheets.debugSpreadsheetId =
-      'LOG_SHEET_ID';
+  configuration.sheets.logSheetId =
+      '1BHqaOe7Ls8l6IbvLD2TJ7zSXtxmSce-n-_kQq8QvTD0';
   configuration.debug = true;
+  configuration.logLevel = 'DEBUG';
   return configuration;
 }

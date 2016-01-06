@@ -17,3 +17,8 @@
 // but we will put it here as a structure that could be used in the future if desired
 /** @OnlyCurrentDoc */
 // Put additional production configuration here
+function provideEnvironmentConfiguration_(configuration) {
+  configuration.sheets.logSheetId = '1BHqaOe7Ls8l6IbvLD2TJ7zSXtxmSce-n-_kQq8QvTD0';
+  configuration.logLevel = 'WARNING';
+  return configuration;
+}
