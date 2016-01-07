@@ -18,12 +18,12 @@
 /** @OnlyCurrentDoc */
 // Put additional production configuration here
 function provideEnvironmentConfiguration_(configuration) {
-  configuration.sheets.logSheetId = '1BHqaOe7Ls8l6IbvLD2TJ7zSXtxmSce-n-_kQq8QvTD0';
+  configuration.sheets.logSheetId = '1nPGo-IaxEQhbN8klrHcuj5mz4D5A0Yactd8KTMdodV0';
   configuration.logLevel = 'WARNING';
   configuration.gmailLabels_snooze = "snooze";
-  configuration.gmailLabels_awake = "awake";
+  configuration.gmailLabels_awake = "back from snooze";
   configuration.gmailLabels_nag = "nag";
-  configuration.gmailLabels_chase = "failure to reply"
+  configuration.gmailLabels_chase = "customer failed to reply"
   configuration.gmailLabels_durations = ["4w","1w","3d","1d"];
   return configuration;
 }
