@@ -32,7 +32,7 @@
   configuration.gmailLabels_snooze = "snooze";
   configuration.gmailLabels_awake = "back from snooze";
   configuration.gmailLabels_nag = "nag";
-  configuration.gmailLabels_chase = "customer failed to reply"
+  configuration.gmailLabels_chase = "customer failed to reply";
   configuration.gmailLabels_durations = ["4w","1w","3d","1d"];
   return configuration;
 }
