@@ -38,7 +38,7 @@ var BetterLog = {
   critical: function(message,optValues){
     if(BetterLogLevels.CRITICAL <= this.level){
       this.log_({"message": (typeof message == 'string' || message instanceof String) ? Utilities.formatString.apply(this, arguments) : message,
-            "level": currentLevel,
+            "level": BetterLogLevels.CRITICAL,
             "time": new Date(),
             "elapsedTime": this.getElapsedTime_()
            });
@@ -49,7 +49,7 @@ var BetterLog = {
   error: function(message,optValues){
     if(BetterLogLevels.ERROR >= this.level){
       this.log_({"message": (typeof message == 'string' || message instanceof String) ? Utilities.formatString.apply(this, arguments) : message,
-            "level": currentLevel,
+            "level": BetterLogLevels.ERROR,
             "time": new Date(),
             "elapsedTime": this.getElapsedTime_()
            });
@@ -60,7 +60,7 @@ var BetterLog = {
   warning: function(message,optValues){
     if(BetterLogLevels.WARNING >= this.level){
       this.log_({"message": (typeof message == 'string' || message instanceof String) ? Utilities.formatString.apply(this, arguments) : message,
-            "level": currentLevel,
+            "level": BetterLogLevels.WARNING,
             "time": new Date(),
             "elapsedTime": this.getElapsedTime_()
            });
@@ -72,7 +72,7 @@ var BetterLog = {
   info: function(message,optValues){
     if(BetterLogLevels.INFO >= this.level){
       this.log_({"message": (typeof message == 'string' || message instanceof String) ? Utilities.formatString.apply(this, arguments) : message,
-            "level": currentLevel,
+            "level": BetterLogLevels.INFO,
             "time": new Date(),
             "elapsedTime": this.getElapsedTime_()
            });
@@ -83,7 +83,7 @@ var BetterLog = {
   debug: function(message,optValues){
     if(BetterLogLevels.DEBUG >= this.level){
       this.log_({"message": (typeof message == 'string' || message instanceof String) ? Utilities.formatString.apply(this, arguments) : message,
-            "level": currentLevel,
+            "level": BetterLogLevels.DEBUG,
             "time": new Date(),
             "elapsedTime": this.getElapsedTime_()
            });
