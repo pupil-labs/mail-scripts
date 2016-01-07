@@ -27,6 +27,10 @@ var knownOptions = {
   string: ['env'],
   'default': {
     env: 'dev'
+  },
+  string: ['user'],
+  'default': {
+    user: 'will'
   }
 };
 var options = minimist(process.argv.slice(2), knownOptions);
@@ -49,6 +53,13 @@ gulp.task('copy-latest', ['clean-deployment'], function() {
   copyServerCode();
   copyClientCode();
 });
+
+// Switch user and update `gapps auth` credentials
+gulp.task('switch-user',['clean-deployments'], function() {
+  return gulp.src('credentials/'+options.user+'.json',{read:false})
+    .pipe(shell(['gapps auth <%= file.path %>']))
+});
+
 
 // Copies all .js that will be run by the Apps Script runtime
 function copyServerCode() {
