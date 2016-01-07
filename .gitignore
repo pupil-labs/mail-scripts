@@ -1,6 +1,7 @@
-# dev + deployment dirs #
+# dirs #
 ##############################
 build
+credentials
 
 # npm files and dirs #
 ######################
