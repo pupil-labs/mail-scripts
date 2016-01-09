@@ -115,7 +115,7 @@ function nag() {
     // Last Date = Mon Oct 12 14:48:13 GMT+07:00 2015
     var threadLabels = threads[j].getLabels();
     var messages = threads[j].getMessages();
-    var last_sender = getLastSenderEmail(messages[messages.length-1].getFrom());
+    var last_sender_email = getLastSenderEmail(messages[messages.length-1].getFrom());
 
     var nagTimes = filterTimeLabels(threadLabels,timeLabels);
     var timeLimit = sumTimeFromDateLabels(nagTimes);
