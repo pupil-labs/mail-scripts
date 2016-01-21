@@ -35,7 +35,7 @@ function threadsToInbox(){
       try{
         len = messages[i].length-1;
       }catch(e) {
-        Logger.error("Mail Script Error : messages[i].length-1. Error message: " + e.message);
+        Logger.warning("Mail Script Warning : There are no more messages - messages[i].length-1. Error message: " + e.message);
         // return early 
         return; 
       }      
@@ -59,19 +59,14 @@ function threadsToInbox(){
 
 
 // snooze conversation -- return the conversation to the inbox after XX days of last message count
-function snooze(){
+function snooze(snoozeLabel,awakeLabel){
   // label variables
   // you must make the "snooze" label and at least one time label
-  // time labels in your gmail interface must match those below
+  // time labels in your gmail interface must match those in the prd config
   // you can use a combination of labels  
-  var config = Configuration.getCurrent();
-  var snoozeLabel = config.gmailLabels_snooze;
-  var awakeLabel = config.gmailLabels_awake;
-  var timeLabels = config.gmailLabels_durations;
-
-  var allLabels = GmailApp.getUserLabels();
+  // var allLabels = GmailApp.getUserLabels();
   var threads = GmailApp.getUserLabelByName(snoozeLabel).getThreads();
-  
+
   for (var j = 0; j < threads.length; j++) {        
 
     var threadLabels = threads[j].getLabels();
@@ -90,11 +85,33 @@ function snooze(){
         threads[j].removeLabel(GmailApp.getUserLabelByName(snoozeTimes[i])); 
       }
       threads[j].removeLabel(GmailApp.getUserLabelByName(snoozeLabel));
-      threads[j].addLabel(GmailApp.getUserLabelByName(awakeLabel));
+      if (awakeLabel && typeof awakeLabel === 'string'){
+        // apply the awake label to the thread
+        threads[j].addLabel(GmailApp.getUserLabelByName(awakeLabel));      
+      }
       threads[j].moveToInbox();
       threads[j].refresh();
     } 
   }
+}
+
+
+function updateSnooze(){
+  var config = Configuration.getCurrent();
+  var snoozeLabel = config.gmailLabels_snooze;
+  var awakeLabel = config.gmailLabels_awake;
+  var timeLabels = config.gmailLabels_durations;
+  
+  snooze(snoozeLabel,awakeLabel);  
+}
+
+function updateAfterSalesSnooze(){
+  var config = Configuration.getCurrent();
+  var snoozeLabel = config.gmailLabels_snoozeAfterSales;
+  var awakeLabel = config.gmailLabels_awakeAfterSales;
+  var timeLabels = config.gmailLabels_durations;
+
+  snooze(snoozeLabel,awakeLabel);
 }
 
 

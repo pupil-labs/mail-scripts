@@ -35,12 +35,24 @@ function sumTimeFromDateLabels(labels) {
   var sum = 0;
   var day = 24 * 60 * 60 * 1000;
   var week = 7 * day;
+  var month = 30 * day; // an 'average' month
+  var year = 365 * day;
   
   for (var i = 0; i < labels.length; i++) {
     var l = labels[i];
     var x = l.split('');
+    var time;
 
-    var time = (x[1] === 'w' ? parseInt(x[0]) * week : parseInt(x[0]) * day);
+    if (x[1] === 'd'){
+      time = parseInt(x[0]) * day;
+    } else if (x[1] === 'w') {
+      time = parseInt(x[0]) * week;
+    } else if (x[1] === 'm') {
+      time = parseInt(x[0]) * month;
+    } else if (x[1] === 'y') {
+      time = parseInt(x[0]) * year;
+    }
+
     sum += time;
   }
   // sum is time in milliseconds
