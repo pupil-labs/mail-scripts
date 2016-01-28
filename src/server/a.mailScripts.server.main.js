@@ -64,7 +64,7 @@ function snooze(snoozeLabel,awakeLabel){
   // you must make the "snooze" label and at least one time label
   // time labels in your gmail interface must match those in the prd config
   // you can use a combination of labels  
-  // var allLabels = GmailApp.getUserLabels();
+  var allLabels = GmailApp.getUserLabels();
   var threads = GmailApp.getUserLabelByName(snoozeLabel).getThreads();
 
   for (var j = 0; j < threads.length; j++) {        
@@ -85,7 +85,7 @@ function snooze(snoozeLabel,awakeLabel){
         threads[j].removeLabel(GmailApp.getUserLabelByName(snoozeTimes[i])); 
       }
       threads[j].removeLabel(GmailApp.getUserLabelByName(snoozeLabel));
-      if (awakeLabel && typeof awakeLabel === 'string'){
+      if (awakeLabel){
         // apply the awake label to the thread
         threads[j].addLabel(GmailApp.getUserLabelByName(awakeLabel));      
       }

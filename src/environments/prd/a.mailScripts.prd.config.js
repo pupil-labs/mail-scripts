@@ -23,11 +23,8 @@ function provideEnvironmentConfiguration_(configuration) {
   configuration.gmailLabels_snooze = "snooze";
   configuration.gmailLabels_awake = "back from snooze";
   configuration.gmailLabels_nag = "nag";
-  configuration.gmailLabels_chase = "customer failed to reply";
-  configuration.gmailLabels_afterSales = "after sales follow-up"
-  configuration.gmailLabels_durations = ['1d','2d','3d','4d',
-                                        '1w','2w','3w',
-                                        '1m','2m','3m',
-                                        '1y'];
+  configuration.gmailLabels_snoozeAfterSales = "snooze after-sale";
+  configuration.gmailLabels_awakeAfterSales = "back from after-sale snooze";  
+  configuration.gmailLabels_durations = ['1d','2d','3d','4d','1w','2w','3w','1m','2m','3m','1y'];
   return configuration;
 }

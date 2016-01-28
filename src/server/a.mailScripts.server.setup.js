@@ -68,7 +68,7 @@ function setupTriggers(){
   ScriptApp.newTrigger('updateAfterSalesSnooze')
       .timeBased()
       .atHour(3)
-      .everyDays(2)
+      .everyDays(1)
       .create();
 
   // nag is called daily at 6AM

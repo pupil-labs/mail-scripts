@@ -33,6 +33,7 @@ function filterTimeLabels(threadLabels,timeLabels) {
 
 function sumTimeFromDateLabels(labels) {
   var sum = 0;
+  var time = 0;
   var day = 24 * 60 * 60 * 1000;
   var week = 7 * day;
   var month = 30 * day; // an 'average' month
@@ -41,7 +42,6 @@ function sumTimeFromDateLabels(labels) {
   for (var i = 0; i < labels.length; i++) {
     var l = labels[i];
     var x = l.split('');
-    var time;
 
     if (x[1] === 'd'){
       time = parseInt(x[0]) * day;
