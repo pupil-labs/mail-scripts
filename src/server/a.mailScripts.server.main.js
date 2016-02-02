@@ -59,7 +59,7 @@ function threadsToInbox(){
 
 
 // snooze conversation -- return the conversation to the inbox after XX days of last message count
-function snooze(snoozeLabel,awakeLabel){
+function snooze(snoozeLabel,awakeLabel,timeLabels){
   // label variables
   // you must make the "snooze" label and at least one time label
   // time labels in your gmail interface must match those in the prd config
@@ -102,7 +102,7 @@ function updateSnooze(){
   var awakeLabel = config.gmailLabels_awake;
   var timeLabels = config.gmailLabels_durations;
   
-  snooze(snoozeLabel,awakeLabel);  
+  snooze(snoozeLabel,awakeLabel,timeLabels);  
 }
 
 function updateAfterSalesSnooze(){
@@ -111,7 +111,7 @@ function updateAfterSalesSnooze(){
   var awakeLabel = config.gmailLabels_awakeAfterSales;
   var timeLabels = config.gmailLabels_durations;
 
-  snooze(snoozeLabel,awakeLabel);
+  snooze(snoozeLabel,awakeLabel,timeLabels);
 }
 
 
