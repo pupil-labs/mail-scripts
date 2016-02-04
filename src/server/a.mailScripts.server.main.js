@@ -35,7 +35,7 @@ function threadsToInbox(){
       try{
         len = messages[i].length-1;
       }catch(e) {
-        Logger.warning("Mail Script Warning : There are no more messages - messages[i].length-1. Error message: " + e.message);
+        Logger.warning("Warning : There are no more messages - messages[i].length-1. Error message: " + e.message);
         // return early 
         return; 
       }      
@@ -50,11 +50,15 @@ function threadsToInbox(){
   }
   
   if (threadsToUpdate.length > 0) {
-    GmailApp.moveThreadsToInbox(threadsToUpdate);
-    GmailApp.refreshThreads(threadsToUpdate);
+    try{
+      GmailApp.moveThreadsToInbox(threadsToUpdate);
+      GmailApp.refreshThreads(threadsToUpdate);
+    }catch(e){
+      Logger.warning("Could not refresh Gmail Inbox. Messages: " + e.message);
+    }
   }
 
-  Logger.debug("Function runtime in (ms): %s", new Date().getTime() - startTime); 
+  // Logger.debug("Function runtime in (ms): %s", new Date().getTime() - startTime); 
 }
 
 

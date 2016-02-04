@@ -32,8 +32,14 @@ function filterTimeLabels(threadLabels,timeLabels) {
 }
 
 function sumTimeFromDateLabels(labels) {
+  var config = Configuration.getCurrent();
+  // override GAS console logger and use our spreadsheet
+  // defined as environment variable for debug configuration
+  Logger = BetterLog.useSpreadsheet(config.sheets.logSheetId);
+  Logger.setLevel(config.logLevel);
+  
   var sum = 0;
-  var time = 0;
+  var time;
   var day = 24 * 60 * 60 * 1000;
   var week = 7 * day;
   var month = 30 * day; // an 'average' month
@@ -54,6 +60,7 @@ function sumTimeFromDateLabels(labels) {
     }
 
     sum += time;
+    Logger.debug("Labels: %s:  - Sum Time (ms): %s", JSON.stringify(labels),sum); 
   }
   // sum is time in milliseconds
   return sum;
