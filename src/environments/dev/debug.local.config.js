@@ -26,7 +26,7 @@
  */
  function provideEnvironmentConfiguration_(configuration) {
   configuration.sheets.logSheetId =
-      '1nPGo-IaxEQhbN8klrHcuj5mz4D5A0Yactd8KTMdodV0';
+      'SHEET_ID_HERE';
   configuration.debug = true;
   configuration.logLevel = 'DEBUG';
   configuration.gmailLabels_snooze = "snooze";

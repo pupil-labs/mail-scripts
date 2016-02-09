@@ -15,14 +15,15 @@
 // mailscripts is a standalone script 
 // therefore different environemnts are only required for debug messages and verbosity
 // but we will put it here as a structure that could be used in the future if desired
-/** @OnlyCurrentDoc */
 // Put additional production configuration here
 function provideEnvironmentConfiguration_(configuration) {
-  configuration.sheets.logSheetId = '1nPGo-IaxEQhbN8klrHcuj5mz4D5A0Yactd8KTMdodV0';
+  configuration.sheets.logSheetId = 
+      'SHEET_ID_HERE';
   configuration.logLevel = 'WARNING';
   configuration.gmailLabels_snooze = "snooze";
   configuration.gmailLabels_awake = "back from snooze";
   configuration.gmailLabels_nag = "nag";
+  configuration.gmailLabels_chase = "customer failed to reply";
   configuration.gmailLabels_snoozeAfterSales = "snooze after-sale";
   configuration.gmailLabels_awakeAfterSales = "back from after-sale snooze";  
   configuration.gmailLabels_durations = ['1d','2d','3d','4d',

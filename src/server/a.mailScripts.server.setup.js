@@ -13,7 +13,7 @@ function getDefaultConfiguration_() {
   return {
     debug: false,
     sheets: {
-      debugSpreadsheetId: null
+      logSheetId: null
     },
   };
 }
