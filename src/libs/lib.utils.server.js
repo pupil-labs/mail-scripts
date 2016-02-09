@@ -32,16 +32,35 @@ function filterTimeLabels(threadLabels,timeLabels) {
 }
 
 function sumTimeFromDateLabels(labels) {
+  var config = Configuration.getCurrent();
+  // override GAS console logger and use our spreadsheet
+  // defined as environment variable for debug configuration
+  Logger = BetterLog.useSpreadsheet(config.sheets.logSheetId);
+  Logger.setLevel(config.logLevel);
+  
   var sum = 0;
+  var time;
   var day = 24 * 60 * 60 * 1000;
   var week = 7 * day;
+  var month = 30 * day; // an 'average' month
+  var year = 365 * day;
   
   for (var i = 0; i < labels.length; i++) {
     var l = labels[i];
     var x = l.split('');
 
-    var time = (x[1] === 'w' ? parseInt(x[0]) * week : parseInt(x[0]) * day);
+    if (x[1] === 'd'){
+      time = parseInt(x[0]) * day;
+    } else if (x[1] === 'w') {
+      time = parseInt(x[0]) * week;
+    } else if (x[1] === 'm') {
+      time = parseInt(x[0]) * month;
+    } else if (x[1] === 'y') {
+      time = parseInt(x[0]) * year;
+    }
+
     sum += time;
+    Logger.debug("Labels: %s:  - Sum Time (ms): %s", JSON.stringify(labels),sum); 
   }
   // sum is time in milliseconds
   return sum;

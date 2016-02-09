@@ -13,7 +13,7 @@ function getDefaultConfiguration_() {
   return {
     debug: false,
     sheets: {
-      debugSpreadsheetId: null
+      logSheetId: null
     },
   };
 }
@@ -54,9 +54,20 @@ function setupTriggers(){
   // snooze is called daily at 5AM
   // the `atHour` function runs + or - 15 min
   // so the time is not always exactly the same
-  ScriptApp.newTrigger('snooze')
+  ScriptApp.newTrigger('updateSnooze')
       .timeBased()
       .atHour(5)
+      .everyDays(1)
+      .create();
+
+  // updateAfterSalesSnooze is called every other day at 3AM
+  // followup is not as urgent and can be +/- one day
+  // this will save us some CPU time
+  // the `atHour` function runs + or - 15 min
+  // so the time is not always exactly the same
+  ScriptApp.newTrigger('updateAfterSalesSnooze')
+      .timeBased()
+      .atHour(3)
       .everyDays(1)
       .create();
 
