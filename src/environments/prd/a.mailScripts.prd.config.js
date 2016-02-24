@@ -11,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+/** @NotOnlyCurrentDoc */
+
 
 // mailscripts is a standalone script 
 // therefore different environemnts are only required for debug messages and verbosity
